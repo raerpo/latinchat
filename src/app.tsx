@@ -38,7 +38,13 @@ class Chat extends React.Component<IChatProps, IChatState> {
       message: e.currentTarget.value
     });
   };
+  handleSubmitWithEnterKey = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === 'Enter') {
+      this.handleSendMessage();
+    }
+  } 
   handleSendMessage = () => {
+    if (this.state.message === '') return;
     const message: IMessage = {message: this.state.message};
     socket.emit('send message', message);
     // Clear message after send
@@ -61,6 +67,7 @@ class Chat extends React.Component<IChatProps, IChatState> {
               type="text"
               value={this.state.message}
               onChange={this.handleChangeMessage}
+              onKeyPress={this.handleSubmitWithEnterKey}
             />
             <button onClick={this.handleSendMessage}>Enviar</button>
           </styles.ChatControlsStyles>

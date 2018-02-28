@@ -29,7 +29,14 @@ var Chat = /** @class */ (function (_super) {
                 message: e.currentTarget.value
             });
         };
+        _this.handleSubmitWithEnterKey = function (e) {
+            if (e.key === 'Enter') {
+                _this.handleSendMessage();
+            }
+        };
         _this.handleSendMessage = function () {
+            if (_this.state.message === '')
+                return;
             var message = { message: _this.state.message };
             socket.emit('send message', message);
             // Clear message after send
@@ -59,7 +66,7 @@ var Chat = /** @class */ (function (_super) {
                 React.createElement(styles.MessagesContainerStyles, null,
                     React.createElement("ul", null, this.renderMessages(this.state.messageList))),
                 React.createElement(styles.ChatControlsStyles, null,
-                    React.createElement("input", { type: "text", value: this.state.message, onChange: this.handleChangeMessage }),
+                    React.createElement("input", { type: "text", value: this.state.message, onChange: this.handleChangeMessage, onKeyPress: this.handleSubmitWithEnterKey }),
                     React.createElement("button", { onClick: this.handleSendMessage }, "Enviar")))));
     };
     return Chat;
