@@ -1,0 +1,11 @@
+"use strict";
+var __makeTemplateObject = (this && this.__makeTemplateObject) || function (cooked, raw) {
+    if (Object.defineProperty) { Object.defineProperty(cooked, "raw", { value: raw }); } else { cooked.raw = raw; }
+    return cooked;
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+var styled_components_1 = require("styled-components");
+exports.LatinChatHome = styled_components_1.default.main(templateObject_1 || (templateObject_1 = __makeTemplateObject(["\n  display: grid;\n  grid-template-rows: 200px 1fr;\n  grid-template-columns: 1fr;\n  text-align: center;\n  font-family: Arial, Helvetica, sans-serif;\n"], ["\n  display: grid;\n  grid-template-rows: 200px 1fr;\n  grid-template-columns: 1fr;\n  text-align: center;\n  font-family: Arial, Helvetica, sans-serif;\n"])));
+exports.LatinChatHomeRoomTitle = styled_components_1.default.h3(templateObject_2 || (templateObject_2 = __makeTemplateObject(["\n  width: 100%;\n  border-radius: 10px 10px 0px 0px;\n  background-color: #ff66cd;\n  margin: 0px 0px 2rem 0px;\n  text-align: left;\n  padding: 0.5rem;\n  box-sizing: border-box;\n"], ["\n  width: 100%;\n  border-radius: 10px 10px 0px 0px;\n  background-color: #ff66cd;\n  margin: 0px 0px 2rem 0px;\n  text-align: left;\n  padding: 0.5rem;\n  box-sizing: border-box;\n"])));
+exports.LatinChatHomeInputNickname = styled_components_1.default.div(templateObject_3 || (templateObject_3 = __makeTemplateObject(["\n  background-color: #fed6fe;\n  width: 60vw;\n  margin: 0px auto;\n  padding: 0px 0px 2rem 0px;\n  border-radius: 10px;\n  position: relative;\n  label {\n    display: block;\n    font-size: 1.5rem;\n    margin-bottom: 1rem;\n  }\n  input {\n    font-size: 1.5rem;\n    text-align: center;\n    margin-bottom: 1.5rem;\n  }\n  button {\n    font-size: 1.5rem;\n  }\n"], ["\n  background-color: #fed6fe;\n  width: 60vw;\n  margin: 0px auto;\n  padding: 0px 0px 2rem 0px;\n  border-radius: 10px;\n  position: relative;\n  label {\n    display: block;\n    font-size: 1.5rem;\n    margin-bottom: 1rem;\n  }\n  input {\n    font-size: 1.5rem;\n    text-align: center;\n    margin-bottom: 1.5rem;\n  }\n  button {\n    font-size: 1.5rem;\n  }\n"])));
+var templateObject_1, templateObject_2, templateObject_3;

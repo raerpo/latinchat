@@ -18,6 +18,7 @@ var React = require("react");
 var ReactDOM = require("react-dom");
 var styled_components_1 = require("styled-components");
 var io = require("socket.io-client");
+var styles = require("./styles");
 /* Latinchat chatroom */
 var ChatStyles = styled_components_1.default.div(templateObject_1 || (templateObject_1 = __makeTemplateObject([""], [""])));
 var MessagesStyles = styled_components_1.default.div(templateObject_2 || (templateObject_2 = __makeTemplateObject([""], [""])));
@@ -37,7 +38,8 @@ var Chat = /** @class */ (function (_super) {
             });
         };
         _this.handleSendMessage = function () {
-            socket.emit('send message', _this.state.message);
+            var message = { message: _this.state.message };
+            socket.emit('send message', message);
             // Clear message after send
             _this.setState({
                 message: ''
@@ -53,8 +55,9 @@ var Chat = /** @class */ (function (_super) {
         // On every message, we should change the state
         socket.on('message', function (message) {
             var chat = _this.state.messageList;
+            var newMessage = message.message;
             _this.setState({
-                messageList: chat.concat(message)
+                messageList: chat.concat(newMessage)
             });
         });
     };
@@ -87,14 +90,15 @@ var LatinChatHome = /** @class */ (function (_super) {
         return _this;
     }
     LatinChatHome.prototype.render = function () {
-        return (React.createElement("div", null,
-            React.createElement("div", null, "Logo"),
-            React.createElement("div", null, "\u00E1rea Rosa"),
+        return (React.createElement(styles.LatinChatHome, null,
             React.createElement("div", null,
-                React.createElement("div", null,
-                    React.createElement("label", { htmlFor: "nickname" }, "Ingresa tu nickname"),
-                    React.createElement("input", { type: "text", name: "nickname", id: "nickname", value: this.state.nickname, onChange: this.handleChangeNicknameInput }),
-                    React.createElement("button", { onClick: this.handleSetNickName }, "Entrar")))));
+                React.createElement("img", { src: "http://photos1.blogger.com/blogger/1102/2841/320/latinchat.jpg", alt: "" })),
+            React.createElement(styles.LatinChatHomeInputNickname, null,
+                React.createElement(styles.LatinChatHomeRoomTitle, null, "Sala Rosa"),
+                React.createElement("label", { htmlFor: "nickname" }, "Ingresa tu nickname"),
+                React.createElement("input", { type: "text", name: "nickname", id: "nickname", value: this.state.nickname, onChange: this.handleChangeNicknameInput }),
+                React.createElement("br", null),
+                React.createElement("button", { onClick: this.handleSetNickName }, "Entrar"))));
     };
     return LatinChatHome;
 }(React.Component));

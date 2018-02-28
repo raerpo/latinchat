@@ -2,6 +2,7 @@ import * as express from 'express';
 import * as path from 'path';
 import * as http from 'http';
 import * as io from 'socket.io';
+import { IMessage } from './chatTypings';
 
 const app = express();
 const server = http.createServer(app);
@@ -19,7 +20,7 @@ socket.on('connection', function(s) {
   s.on('disconnect', function(){
     console.log('user disconnected');
   });
-  s.on('send message', function(message: string) {
+  s.on('send message', function(message: IMessage) {
     socket.emit('message', message);
   });
 });

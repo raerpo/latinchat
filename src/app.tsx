@@ -3,6 +3,7 @@ import * as ReactDOM from 'react-dom';
 import styled from 'styled-components';
 import * as io from 'socket.io-client';
 import { IMessage } from './chatTypings';
+import * as styles from './styles';
 
 /* Latinchat chatroom */
 
@@ -30,10 +31,11 @@ class Chat extends React.Component<IChatProps, IChatState> {
   };
   componentDidMount() {
     // On every message, we should change the state
-    socket.on('message', (message: string) => {
+    socket.on('message', (message: IMessage) => {
       const chat = this.state.messageList;
+      const newMessage = message.message;
       this.setState({
-        messageList: chat.concat(message)
+        messageList: chat.concat(newMessage)
       });
     });
   }
@@ -43,7 +45,8 @@ class Chat extends React.Component<IChatProps, IChatState> {
     });
   };
   handleSendMessage = () => {
-    socket.emit('send message', this.state.message);
+    const message: IMessage = {message: this.state.message};
+    socket.emit('send message', message);
     // Clear message after send
     this.setState({
       message: ''
@@ -96,23 +99,26 @@ class LatinChatHome extends React.Component<ILatinChatProps, ILatinChatState> {
   };
   render() {
     return (
-      <div>
-        <div>Logo</div>
-        <div>área Rosa</div>
+      <styles.LatinChatHome>
         <div>
-          <div>
-            <label htmlFor="nickname">Ingresa tu nickname</label>
-            <input
-              type="text"
-              name="nickname"
-              id="nickname"
-              value={this.state.nickname}
-              onChange={this.handleChangeNicknameInput}
-            />
-            <button onClick={this.handleSetNickName}>Entrar</button>
-          </div>
+          <img src="http://photos1.blogger.com/blogger/1102/2841/320/latinchat.jpg" alt=""/>
         </div>
-      </div>
+        <styles.LatinChatHomeInputNickname>
+          <styles.LatinChatHomeRoomTitle>
+            Sala Rosa
+          </styles.LatinChatHomeRoomTitle>
+          <label htmlFor="nickname">Ingresa tu nickname</label>
+          <input
+            type="text"
+            name="nickname"
+            id="nickname"
+            value={this.state.nickname}
+            onChange={this.handleChangeNicknameInput}
+          />
+          <br />
+          <button onClick={this.handleSetNickName}>Entrar</button>
+        </styles.LatinChatHomeInputNickname>
+      </styles.LatinChatHome>
     );
   }
 }
