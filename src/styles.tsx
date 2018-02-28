@@ -35,8 +35,12 @@ export const LatinChatHomeInputNickname = styled.div`
     font-size: 1.5rem;
     text-align: center;
     margin-bottom: 1.5rem;
+    max-width: 80%;
   }
   button {
     font-size: 1.5rem;
+  }
+  @media (max-width: 640px) { 
+    width: 90vw;
   }
 `;
