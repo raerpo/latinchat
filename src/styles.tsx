@@ -44,3 +44,47 @@ export const LatinChatHomeInputNickname = styled.div`
     width: 90vw;
   }
 `;
+
+export const ChatStyles = styled.main`
+  width: 100vw;
+  height: 100vh;
+`;
+
+export const MessagesStyles = styled.div`
+  display: grid;
+  grid-template-rows: 80vh 1fr;
+  grid-template-columns: 100vw;
+`;
+
+export const MessagesContainerStyles = styled.div`
+  background-color: #fed6fe;
+  padding: 1rem;
+  box-sizing: border-box;
+  width: 90%;
+  margin: 0 auto;
+  ul {
+    background-color: #ffffff;
+    width: 100%;
+    height: 100%;
+    padding: 0px;
+    margin: 0 auto;
+    list-style: none;
+    overflow-y: scroll;
+    li {
+      padding: .5rem 1rem;
+      border-bottom: 1px dashed #ccc;
+    }
+  }
+`
+export const ChatControlsStyles = styled.div`
+    width: 90%;
+    margin: 0 auto;
+    background-color: #ccc;
+    padding: 1rem;
+    box-sizing: border-box;
+    display: flex;
+    input {
+      width: 100%;
+      font-size: 1rem;
+    }
+`;

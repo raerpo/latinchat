@@ -7,12 +7,6 @@ import * as styles from './styles';
 
 /* Latinchat chatroom */
 
-const ChatStyles = styled.div``;
-
-const MessagesStyles = styled.div``;
-
-const UsersStyles = styled.div``;
-
 const socket = io();
 
 interface IChatProps {
@@ -57,20 +51,21 @@ class Chat extends React.Component<IChatProps, IChatState> {
   };
   render() {
     return (
-      <ChatStyles>
-        <MessagesStyles>
-          <ul>{this.renderMessages(this.state.messageList)}</ul>
-          <div>
+      <styles.ChatStyles>
+        <styles.MessagesStyles>
+          <styles.MessagesContainerStyles>
+            <ul>{this.renderMessages(this.state.messageList)}</ul>
+          </styles.MessagesContainerStyles>
+          <styles.ChatControlsStyles>
             <input
               type="text"
               value={this.state.message}
               onChange={this.handleChangeMessage}
             />
             <button onClick={this.handleSendMessage}>Enviar</button>
-          </div>
-        </MessagesStyles>
-        <UsersStyles />
-      </ChatStyles>
+          </styles.ChatControlsStyles>
+        </styles.MessagesStyles>
+      </styles.ChatStyles>
     );
   }
 }

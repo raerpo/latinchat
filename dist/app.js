@@ -1,8 +1,4 @@
 "use strict";
-var __makeTemplateObject = (this && this.__makeTemplateObject) || function (cooked, raw) {
-    if (Object.defineProperty) { Object.defineProperty(cooked, "raw", { value: raw }); } else { cooked.raw = raw; }
-    return cooked;
-};
 var __extends = (this && this.__extends) || (function () {
     var extendStatics = Object.setPrototypeOf ||
         ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
@@ -16,13 +12,9 @@ var __extends = (this && this.__extends) || (function () {
 Object.defineProperty(exports, "__esModule", { value: true });
 var React = require("react");
 var ReactDOM = require("react-dom");
-var styled_components_1 = require("styled-components");
 var io = require("socket.io-client");
 var styles = require("./styles");
 /* Latinchat chatroom */
-var ChatStyles = styled_components_1.default.div(templateObject_1 || (templateObject_1 = __makeTemplateObject([""], [""])));
-var MessagesStyles = styled_components_1.default.div(templateObject_2 || (templateObject_2 = __makeTemplateObject([""], [""])));
-var UsersStyles = styled_components_1.default.div(templateObject_3 || (templateObject_3 = __makeTemplateObject([""], [""])));
 var socket = io();
 var Chat = /** @class */ (function (_super) {
     __extends(Chat, _super);
@@ -62,13 +54,13 @@ var Chat = /** @class */ (function (_super) {
         });
     };
     Chat.prototype.render = function () {
-        return (React.createElement(ChatStyles, null,
-            React.createElement(MessagesStyles, null,
-                React.createElement("ul", null, this.renderMessages(this.state.messageList)),
-                React.createElement("div", null,
+        return (React.createElement(styles.ChatStyles, null,
+            React.createElement(styles.MessagesStyles, null,
+                React.createElement(styles.MessagesContainerStyles, null,
+                    React.createElement("ul", null, this.renderMessages(this.state.messageList))),
+                React.createElement(styles.ChatControlsStyles, null,
                     React.createElement("input", { type: "text", value: this.state.message, onChange: this.handleChangeMessage }),
-                    React.createElement("button", { onClick: this.handleSendMessage }, "Enviar"))),
-            React.createElement(UsersStyles, null)));
+                    React.createElement("button", { onClick: this.handleSendMessage }, "Enviar")))));
     };
     return Chat;
 }(React.Component));
@@ -124,4 +116,3 @@ var App = /** @class */ (function (_super) {
     return App;
 }(React.Component));
 ReactDOM.render(React.createElement(App, null), document.querySelector('#root'));
-var templateObject_1, templateObject_2, templateObject_3;
