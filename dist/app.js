@@ -18,9 +18,10 @@ var React = require("react");
 var ReactDOM = require("react-dom");
 var styled_components_1 = require("styled-components");
 var io = require("socket.io-client");
-var ChatStyles = styled_components_1.default.div(templateObject_1 || (templateObject_1 = __makeTemplateObject(["\n"], ["\n"])));
-var MessagesStyles = styled_components_1.default.div(templateObject_2 || (templateObject_2 = __makeTemplateObject(["\n"], ["\n"])));
-var UsersStyles = styled_components_1.default.div(templateObject_3 || (templateObject_3 = __makeTemplateObject(["\n"], ["\n"])));
+/* Latinchat chatroom */
+var ChatStyles = styled_components_1.default.div(templateObject_1 || (templateObject_1 = __makeTemplateObject([""], [""])));
+var MessagesStyles = styled_components_1.default.div(templateObject_2 || (templateObject_2 = __makeTemplateObject([""], [""])));
+var UsersStyles = styled_components_1.default.div(templateObject_3 || (templateObject_3 = __makeTemplateObject([""], [""])));
 var socket = io();
 var Chat = /** @class */ (function (_super) {
     __extends(Chat, _super);
@@ -71,15 +72,52 @@ var Chat = /** @class */ (function (_super) {
 var LatinChatHome = /** @class */ (function (_super) {
     __extends(LatinChatHome, _super);
     function LatinChatHome() {
-        return _super !== null && _super.apply(this, arguments) || this;
+        var _this = _super !== null && _super.apply(this, arguments) || this;
+        _this.state = {
+            nickname: ''
+        };
+        _this.handleChangeNicknameInput = function (e) {
+            _this.setState({
+                nickname: e.currentTarget.value
+            });
+        };
+        _this.handleSetNickName = function () {
+            _this.props.setNickName(_this.state.nickname);
+        };
+        return _this;
     }
     LatinChatHome.prototype.render = function () {
-        return React.createElement("div", null,
+        return (React.createElement("div", null,
             React.createElement("div", null, "Logo"),
             React.createElement("div", null, "\u00E1rea Rosa"),
-            React.createElement("div", null));
+            React.createElement("div", null,
+                React.createElement("div", null,
+                    React.createElement("label", { htmlFor: "nickname" }, "Ingresa tu nickname"),
+                    React.createElement("input", { type: "text", name: "nickname", id: "nickname", value: this.state.nickname, onChange: this.handleChangeNicknameInput }),
+                    React.createElement("button", { onClick: this.handleSetNickName }, "Entrar")))));
     };
     return LatinChatHome;
 }(React.Component));
-ReactDOM.render(React.createElement(Chat, null), document.querySelector('#root'));
+/* Latinchat app */
+var App = /** @class */ (function (_super) {
+    __extends(App, _super);
+    function App() {
+        var _this = _super !== null && _super.apply(this, arguments) || this;
+        _this.state = {
+            nickname: ''
+        };
+        _this.setNickName = function (nickname) {
+            _this.setState({
+                nickname: nickname
+            });
+        };
+        return _this;
+    }
+    App.prototype.render = function () {
+        var nickname = this.state.nickname;
+        return nickname === '' ? (React.createElement(LatinChatHome, { setNickName: this.setNickName })) : (React.createElement(Chat, { nickname: nickname }));
+    };
+    return App;
+}(React.Component));
+ReactDOM.render(React.createElement(App, null), document.querySelector('#root'));
 var templateObject_1, templateObject_2, templateObject_3;

@@ -4,23 +4,26 @@ import styled from 'styled-components';
 import * as io from 'socket.io-client';
 import { IMessage } from './chatTypings';
 
-const ChatStyles = styled.div`
-`;
+/* Latinchat chatroom */
 
-const MessagesStyles = styled.div`
-`;
+const ChatStyles = styled.div``;
 
-const UsersStyles = styled.div`
-`;
+const MessagesStyles = styled.div``;
+
+const UsersStyles = styled.div``;
 
 const socket = io();
 
-interface IChatState {
-  message: string,
-  messageList: string[]
+interface IChatProps {
+  nickname: string;
 }
 
-class Chat extends React.Component<{}, IChatState> {
+interface IChatState {
+  message: string;
+  messageList: string[];
+}
+
+class Chat extends React.Component<IChatProps, IChatState> {
   state: IChatState = {
     message: '',
     messageList: []
@@ -47,15 +50,13 @@ class Chat extends React.Component<{}, IChatState> {
     });
   };
   renderMessages = (messages: string[]) => {
-    return messages.map((message, index) => <li key={index}>{ message }</li>)
-  }
+    return messages.map((message, index) => <li key={index}>{message}</li>);
+  };
   render() {
     return (
       <ChatStyles>
         <MessagesStyles>
-         <ul>
-            {this.renderMessages(this.state.messageList)}
-          </ul>
+          <ul>{this.renderMessages(this.state.messageList)}</ul>
           <div>
             <input
               type="text"
@@ -65,26 +66,76 @@ class Chat extends React.Component<{}, IChatState> {
             <button onClick={this.handleSendMessage}>Enviar</button>
           </div>
         </MessagesStyles>
-        <UsersStyles>
-
-        </UsersStyles>
+        <UsersStyles />
       </ChatStyles>
     );
   }
 }
 
+/* Latinchat home */
 
-class LatinChatHome extends React.Component {
+interface ILatinChatProps {
+  setNickName: (nickname: string) => void;
+}
+
+interface ILatinChatState {
+  nickname: string;
+}
+
+class LatinChatHome extends React.Component<ILatinChatProps, ILatinChatState> {
+  state: ILatinChatState = {
+    nickname: ''
+  };
+  handleChangeNicknameInput = (e: React.SyntheticEvent<HTMLInputElement>) => {
+    this.setState({
+      nickname: e.currentTarget.value
+    });
+  };
+  handleSetNickName = () => {
+    this.props.setNickName(this.state.nickname);
+  };
   render() {
-    return <div>
-      <div>Logo</div>
-      <div>área Rosa</div>
+    return (
       <div>
-        
+        <div>Logo</div>
+        <div>área Rosa</div>
+        <div>
+          <div>
+            <label htmlFor="nickname">Ingresa tu nickname</label>
+            <input
+              type="text"
+              name="nickname"
+              id="nickname"
+              value={this.state.nickname}
+              onChange={this.handleChangeNicknameInput}
+            />
+            <button onClick={this.handleSetNickName}>Entrar</button>
+          </div>
+        </div>
       </div>
-    </div>
+    );
   }
 }
 
+/* Latinchat app */
 
-ReactDOM.render(<Chat />, document.querySelector('#root'));
+class App extends React.Component {
+  state = {
+    nickname: ''
+  };
+  setNickName = (nickname: string) => {
+    this.setState({
+      nickname
+    });
+  };
+  render() {
+    const { nickname } = this.state;
+    return nickname === '' ? (
+      <LatinChatHome setNickName={this.setNickName} />
+    ) : (
+      <Chat nickname={nickname} />
+    );
+  }
+}
+
+ReactDOM.render(<App />, document.querySelector('#root'));
