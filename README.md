@@ -8,6 +8,9 @@ npm install
 npm run build && npm run start
 ```
 
+### Live version
+[LatinChat](https://latinchat-fun.herokuapp.com/)
+
 ### Sources
 
 [When should i use typescript](https://medium.freecodecamp.org/when-should-i-use-typescript-311cb5fe801b)
