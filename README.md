@@ -1,4 +1,4 @@
-## Latinchat with TypeScript
+## Small Chat app created with TypeScript
 Little app to show a fullstack TypeScript application.
 Slides: http://slides.com/raerpo/tech-talk-typescript
 
